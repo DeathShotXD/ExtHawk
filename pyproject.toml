@@ -1,0 +1,27 @@
+[project]
+name = "exthawk"
+version = "0.1.0"
+description = "Attack-surface scanner and exploit harness for browser extensions"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "DeathShotXD" }]
+keywords = ["browser-extension", "manifest-v3", "security", "offsec", "chromium"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Security",
+]
+
+[project.scripts]
+exthawk = "exthawk:main"
+
+[project.urls]
+Homepage = "https://github.com/DeathShotXD/ExtHawk"
+
+[tool.setuptools]
+py-modules = ["exthawk"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"

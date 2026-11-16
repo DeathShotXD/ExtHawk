@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-labelledby="ftitle fdesc">
+  <title id="ftitle">ExtHawk attack chain: a web page reaches a privileged extension service worker</title>
+  <desc id="fdesc">Five stages map a page message from externally_connectable through onMessageExternal to cookies, scripting and fetch, then to proof.</desc>
+  <defs>
+    <linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05080c"/>
+      <stop offset=".55" stop-color="#070b12"/>
+      <stop offset="1" stop-color="#0b0716"/>
+    </linearGradient>
+    <linearGradient id="fconn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#35d0c0" stop-opacity=".2"/>
+      <stop offset=".5" stop-color="#35d0c0" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity=".2"/>
+    </linearGradient>
+    <pattern id="fgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0 L0 0 0 30" fill="none" stroke="#35d0c0" stroke-opacity=".045"/>
+    </pattern>
+    <pattern id="fdots" width="11" height="11" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r=".9" fill="#e7e2d8" fill-opacity=".035"/>
+    </pattern>
+    <filter id="fglow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .kicker { font-size: 10.5px; letter-spacing: 2.2px; fill: #6f8093; }
+      .idx { font-size: 9.5px; letter-spacing: 1.6px; fill: #35d0c0; opacity: .9; }
+      .nt { font-size: 14px; font-weight: 800; letter-spacing: .4px; fill: #e7e2d8; }
+      .nc { font-size: 10.5px; letter-spacing: .2px; fill: #aab6c4; }
+      .ns { font-size: 9.5px; letter-spacing: .6px; fill: #6f8093; }
+      .flow { stroke-dasharray: 5 7; animation: fflow 1.9s linear infinite; }
+      .pulse { animation: fpulse 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      .blip { animation: fblip 3.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+      @keyframes fflow { to { stroke-dashoffset: -48; } }
+      @keyframes fpulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes fblip { 0% { transform: scale(.55); opacity: .6; } 80%,100% { transform: scale(2.1); opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .flow,.pulse,.blip { animation: none; } }
+    </style>
+  </defs>
+
+  <rect width="1200" height="440" fill="url(#fbg)"/>
+  <rect width="1200" height="440" fill="url(#fgrid)"/>
+  <rect width="1200" height="440" fill="url(#fdots)"/>
+
+  <text x="40" y="38" class="mono kicker">ATTACK CHAIN / EXTERNAL MESSAGE BRIDGE</text>
+  <text x="1160" y="38" text-anchor="end" class="mono kicker">ONE PAGE / NO EXTENSION CREDENTIALS</text>
+
+  <!-- connectors -->
+  <g stroke="url(#fconn)" stroke-width="1.6" fill="none">
+    <path d="M232 140 H272" class="flow"/>
+    <path d="M464 140 H504" class="flow"/>
+    <path d="M696 140 H736" class="flow"/>
+    <path d="M928 140 H968" class="flow"/>
+  </g>
+  <g fill="#35d0c0" fill-opacity=".9">
+    <path d="M266 135 l6 5 l-6 5z"/>
+    <path d="M498 135 l6 5 l-6 5z"/>
+    <path d="M730 135 l6 5 l-6 5z"/>
+    <path d="M962 135 l6 5 l-6 5z"/>
+  </g>
+
+  <!-- 01 -->
+  <g transform="translate(40 84)">
+    <rect width="192" height="124" rx="8" fill="#080d14" stroke="#35d0c0" stroke-opacity=".34"/>
+    <rect x="0" y="0" width="3" height="124" rx="1.5" fill="#35d0c0" opacity=".85"/>
+    <text x="16" y="24" class="mono idx">01 / ATTACKER PAGE</text>
+    <text x="16" y="50" class="mono nt">web page</text>
+    <text x="16" y="72" class="mono nc">chrome.runtime.sendMessage(</text>
+    <text x="16" y="90" class="mono nc">  EXT_ID, {action:"collect"})</text>
+    <text x="16" y="110" class="mono ns">http://127.0.0.1/*</text>
+    <circle cx="176" cy="20" r="2.4" fill="#35d0c0" class="blip"/>
+  </g>
+
+  <!-- 02 -->
+  <g transform="translate(272 84)">
+    <rect width="192" height="124" rx="8" fill="#080d14" stroke="#35d0c0" stroke-opacity=".26"/>
+    <rect x="0" y="0" width="3" height="124" rx="1.5" fill="#35d0c0" opacity=".65"/>
+    <text x="16" y="24" class="mono idx">02 / MANIFEST</text>
+    <text x="16" y="50" class="mono nt" font-size="12">externally_connectable</text>
+    <text x="16" y="72" class="mono nc">"matches": [</text>
+    <text x="16" y="90" class="mono nc">  "http://127.0.0.1/*"</text>
+    <text x="16" y="110" class="mono ns">the page is on the guest list</text>
+  </g>
+
+  <!-- 03 -->
+  <g transform="translate(504 84)">
+    <rect width="192" height="124" rx="8" fill="#0a0b16" stroke="#a78bfa" stroke-opacity=".38"/>
+    <rect x="0" y="0" width="3" height="124" rx="1.5" fill="#a78bfa" opacity=".85"/>
+    <text x="16" y="24" class="mono idx" fill="#a78bfa">03 / SERVICE WORKER</text>
+    <text x="16" y="50" class="mono nt">onMessageExternal</text>
+    <text x="16" y="72" class="mono nc">(msg, sender, reply) =&gt; {</text>
+    <text x="16" y="90" class="mono nc">  switch (msg.action) ...</text>
+    <text x="16" y="110" class="mono ns">no sender.origin check</text>
+    <circle cx="176" cy="20" r="2.4" fill="#a78bfa" class="blip"/>
+  </g>
+
+  <!-- 04 -->
+  <g transform="translate(736 84)">
+    <rect width="192" height="124" rx="8" fill="#0d0b0a" stroke="#f0b45a" stroke-opacity=".36"/>
+    <rect x="0" y="0" width="3" height="124" rx="1.5" fill="#f0b45a" opacity=".85"/>
+    <text x="16" y="24" class="mono idx" fill="#f0b45a">04 / PRIVILEGE</text>
+    <text x="16" y="50" class="mono nt" font-size="12">cookies / scripting</text>
+    <text x="16" y="72" class="mono nc">chrome.cookies.getAll({})</text>
+    <text x="16" y="90" class="mono nc">executeScript({world:"MAIN"})</text>
+    <text x="16" y="110" class="mono ns">the page drives the API</text>
+  </g>
+
+  <!-- 05 -->
+  <g transform="translate(968 84)">
+    <rect width="192" height="124" rx="8" fill="#080d0c" stroke="#35d0c0" stroke-opacity=".4"/>
+    <rect x="0" y="0" width="3" height="124" rx="1.5" fill="#35d0c0" opacity=".85"/>
+    <text x="16" y="24" class="mono idx">05 / PROOF</text>
+    <text x="16" y="50" class="mono nt">live marker</text>
+    <text x="16" y="72" class="mono nc" fill="#35d0c0">cookie callback</text>
+    <text x="16" y="90" class="mono nc" fill="#35d0c0">EXTHAWK_INJECT</text>
+    <text x="16" y="110" class="mono ns">5/5 payloads confirmed</text>
+    <circle cx="176" cy="20" r="2.4" fill="#35d0c0" class="blip"/>
+  </g>
+
+  <!-- footer band -->
+  <g transform="translate(40 250)">
+    <rect width="1120" height="140" rx="10" fill="#080d14" stroke="#22303f"/>
+    <text x="22" y="28" class="mono kicker" fill="#a78bfa">WHY IT WORKS</text>
+    <text x="22" y="56" class="mono nc" fill="#e7e2d8">The extension trusts the page because the page matches the manifest. The page trusts the extension because it holds the</text>
+    <text x="22" y="76" class="mono nc" fill="#e7e2d8">privileged APIs. Neither side checks the other. ExtHawk turns that missing check into a reproducible message sequence.</text>
+    <text x="22" y="104" class="mono ns" fill="#6f8093">static: onMessageExternal + externally_connectable + cookies/scripting/eval  -&gt;  dynamic: real page, real service worker, real proof</text>
+    <text x="22" y="126" class="mono ns" fill="#6f8093">the lab is an A/B pair: HawkNotes 1.0.0 is exploitable, HawkNotes 1.0.1 is clean</text>
+  </g>
+
+  <path d="M40 424 H1160" stroke="url(#fconn)" stroke-width="1" opacity=".5"/>
+</svg>

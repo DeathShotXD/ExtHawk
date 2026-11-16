@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    env:
+      EXTHAWK_SKIP_DYNAMIC: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: compile
+        run: python -m py_compile exthawk.py
+      - name: tests
+        run: python -m unittest discover -s tests -v
+
+  dynamic:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install Chrome for Testing
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          url = "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json"
+          with urllib.request.urlopen(url) as r:
+              data = json.load(r)
+          stable = data["channels"]["Stable"]
+          link = next(d["url"] for d in stable["downloads"]["chrome"] if d["platform"] == "linux64")
+          print(f"Chrome for Testing {stable['version']}")
+          urllib.request.urlretrieve(link, "chrome-linux64.zip")
+          with open(os.environ["GITHUB_ENV"], "a") as f:
+              f.write(f"CHROME_BIN={os.getcwd()}/chrome-linux64/chrome\n")
+          PY
+          unzip -q chrome-linux64.zip
+      - name: tests
+        run: python -m unittest discover -s tests -v
+      - name: A/B lab
+        run: ./lab/run.sh

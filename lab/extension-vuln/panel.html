@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>HawkNotes</title></head>
+<body>
+  <h1>HawkNotes</h1>
+  <div id="note"></div>
+  <script>
+    document.getElementById("note").innerHTML =
+      decodeURIComponent(location.hash.slice(1));
+  </script>
+</body>
+</html>

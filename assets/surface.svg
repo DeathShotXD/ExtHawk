@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500" role="img" aria-labelledby="stitle sdesc">
+  <title id="stitle">ExtHawk static surface: manifest, code, correlations, artifacts</title>
+  <desc id="sdesc">Four columns list the manifest checks, code sinks and secrets, correlation rules, and generated artifacts.</desc>
+  <defs>
+    <linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05080c"/>
+      <stop offset=".55" stop-color="#070b12"/>
+      <stop offset="1" stop-color="#0b0716"/>
+    </linearGradient>
+    <linearGradient id="sline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#35d0c0" stop-opacity=".0"/>
+      <stop offset=".2" stop-color="#35d0c0" stop-opacity=".8"/>
+      <stop offset=".8" stop-color="#a78bfa" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity=".0"/>
+    </linearGradient>
+    <pattern id="sgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0 L0 0 0 30" fill="none" stroke="#35d0c0" stroke-opacity=".045"/>
+    </pattern>
+    <pattern id="sdots" width="11" height="11" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r=".9" fill="#e7e2d8" fill-opacity=".035"/>
+    </pattern>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .kicker { font-size: 10.5px; letter-spacing: 2.2px; fill: #6f8093; }
+      .col { font-size: 13px; font-weight: 800; letter-spacing: .5px; fill: #e7e2d8; }
+      .item { font-size: 11px; letter-spacing: .1px; fill: #aab6c4; }
+      .dim { font-size: 10px; letter-spacing: .4px; fill: #6f8093; }
+      .crit { font-size: 9px; letter-spacing: .7px; fill: #ff5c7a; }
+      .high { font-size: 9px; letter-spacing: .7px; fill: #f0b45a; }
+      .med { font-size: 9px; letter-spacing: .7px; fill: #a78bfa; }
+      .low { font-size: 9px; letter-spacing: .7px; fill: #35d0c0; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="500" fill="url(#sbg)"/>
+  <rect width="1200" height="500" fill="url(#sgrid)"/>
+  <rect width="1200" height="500" fill="url(#sdots)"/>
+
+  <text x="40" y="38" class="mono kicker">STATIC SURFACE / WHAT EXTHAWK READS</text>
+  <text x="1160" y="38" text-anchor="end" class="mono kicker">MANIFEST + CODE + CORRELATION</text>
+
+  <!-- column 1 -->
+  <g transform="translate(40 70)">
+    <rect width="264" height="336" rx="10" fill="#080d14" stroke="#22303f"/>
+    <rect x="0" y="0" width="264" height="3" rx="1.5" fill="#35d0c0" opacity=".8"/>
+    <text x="18" y="32" class="mono col">MANIFEST</text>
+    <text x="18" y="54" class="mono dim">what the browser grants</text>
+    <path d="M18 68 H246" stroke="#35d0c0" stroke-opacity=".16"/>
+    <text x="18" y="92" class="mono item">host_permissions</text>
+    <text x="246" y="92" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="114" class="mono item">permissions: cookies</text>
+    <text x="246" y="114" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="136" class="mono item">permissions: scripting</text>
+    <text x="246" y="136" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="158" class="mono item">externally_connectable</text>
+    <text x="246" y="158" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="180" class="mono item">web_accessible_resources</text>
+    <text x="246" y="180" text-anchor="end" class="mono med">MED</text>
+    <text x="18" y="202" class="mono item">content_scripts: all_urls</text>
+    <text x="246" y="202" text-anchor="end" class="mono med">MED</text>
+    <text x="18" y="224" class="mono item">weak CSP / unsafe-eval</text>
+    <text x="246" y="224" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="246" class="mono item">update_url over HTTP</text>
+    <text x="246" y="246" text-anchor="end" class="mono med">MED</text>
+    <text x="18" y="268" class="mono item">manifest v2</text>
+    <text x="246" y="268" text-anchor="end" class="mono low">LOW</text>
+    <text x="18" y="290" class="mono item">nativeMessaging / proxy</text>
+    <text x="246" y="290" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="318" class="mono dim">reads manifest.json once</text>
+  </g>
+
+  <!-- column 2 -->
+  <g transform="translate(324 70)">
+    <rect width="264" height="336" rx="10" fill="#080d14" stroke="#22303f"/>
+    <rect x="0" y="0" width="264" height="3" rx="1.5" fill="#a78bfa" opacity=".8"/>
+    <text x="18" y="32" class="mono col">CODE</text>
+    <text x="18" y="54" class="mono dim">what the package ships</text>
+    <path d="M18 68 H246" stroke="#a78bfa" stroke-opacity=".16"/>
+    <text x="18" y="92" class="mono item">eval / new Function</text>
+    <text x="246" y="92" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="114" class="mono item">innerHTML / outerHTML</text>
+    <text x="246" y="114" text-anchor="end" class="mono med">MED</text>
+    <text x="18" y="136" class="mono item">postMessage with "*"</text>
+    <text x="246" y="136" text-anchor="end" class="mono med">MED</text>
+    <text x="18" y="158" class="mono item">window message listener</text>
+    <text x="246" y="158" text-anchor="end" class="mono med">MED</text>
+    <text x="18" y="180" class="mono item">chrome.cookies / debugger</text>
+    <text x="246" y="180" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="202" class="mono item">scripting.executeScript</text>
+    <text x="246" y="202" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="224" class="mono item">remote script / import</text>
+    <text x="246" y="224" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="246" class="mono item">AWS / Google / GitHub</text>
+    <text x="246" y="246" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="268" class="mono item">Slack / Stripe / JWT</text>
+    <text x="246" y="268" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="290" class="mono item">private key block</text>
+    <text x="246" y="290" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="318" class="mono dim">secrets are masked in output</text>
+  </g>
+
+  <!-- column 3 -->
+  <g transform="translate(608 70)">
+    <rect width="264" height="336" rx="10" fill="#080d14" stroke="#22303f"/>
+    <rect x="0" y="0" width="264" height="3" rx="1.5" fill="#f0b45a" opacity=".8"/>
+    <text x="18" y="32" class="mono col">CORRELATION</text>
+    <text x="18" y="54" class="mono dim">where it becomes a chain</text>
+    <path d="M18 68 H246" stroke="#f0b45a" stroke-opacity=".16"/>
+    <text x="18" y="92" class="mono item">external -&gt; cookies</text>
+    <text x="246" y="92" text-anchor="end" class="mono crit">CRIT</text>
+    <text x="18" y="114" class="mono item">external -&gt; scripting</text>
+    <text x="246" y="114" text-anchor="end" class="mono crit">CRIT</text>
+    <text x="18" y="136" class="mono item">external -&gt; eval</text>
+    <text x="246" y="136" text-anchor="end" class="mono crit">CRIT</text>
+    <text x="18" y="158" class="mono item">external -&gt; native</text>
+    <text x="246" y="158" text-anchor="end" class="mono crit">CRIT</text>
+    <text x="18" y="180" class="mono item">external -&gt; debugger</text>
+    <text x="246" y="180" text-anchor="end" class="mono crit">CRIT</text>
+    <text x="18" y="202" class="mono item">no sender.origin check</text>
+    <text x="246" y="202" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="224" class="mono item">postMessage -&gt; innerHTML</text>
+    <text x="246" y="224" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="246" class="mono item">WAR HTML -&gt; innerHTML</text>
+    <text x="246" y="246" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="268" class="mono item">cookies + all_urls</text>
+    <text x="246" y="268" text-anchor="end" class="mono high">HIGH</text>
+    <text x="18" y="290" class="mono item">same-file reachability</text>
+    <text x="246" y="290" text-anchor="end" class="mono low">YES</text>
+    <text x="18" y="318" class="mono dim">no cross-file guessing</text>
+  </g>
+
+  <!-- column 4 -->
+  <g transform="translate(892 70)">
+    <rect width="268" height="336" rx="10" fill="#080d14" stroke="#22303f"/>
+    <rect x="0" y="0" width="268" height="3" rx="1.5" fill="#35d0c0" opacity=".8"/>
+    <text x="18" y="32" class="mono col">ARTIFACTS</text>
+    <text x="18" y="54" class="mono dim">what you take away</text>
+    <path d="M18 68 H250" stroke="#35d0c0" stroke-opacity=".16"/>
+    <text x="18" y="92" class="mono item">extension id</text>
+    <text x="250" y="92" text-anchor="end" class="mono low">32 chars</text>
+    <text x="18" y="114" class="mono item">CRX2 / CRX3 parser</text>
+    <text x="250" y="114" text-anchor="end" class="mono low">YES</text>
+    <text x="18" y="136" class="mono item">safe zip extraction</text>
+    <text x="250" y="136" text-anchor="end" class="mono low">YES</text>
+    <text x="18" y="158" class="mono item">JSON report</text>
+    <text x="250" y="158" text-anchor="end" class="mono low">scan --json</text>
+    <text x="18" y="180" class="mono item">standalone PoC</text>
+    <text x="250" y="180" text-anchor="end" class="mono low">poc</text>
+    <text x="18" y="202" class="mono item">headless harness</text>
+    <text x="250" y="202" text-anchor="end" class="mono low">exploit</text>
+    <text x="18" y="224" class="mono item">live DOM markers</text>
+    <text x="250" y="224" text-anchor="end" class="mono low">YES</text>
+    <text x="18" y="246" class="mono item">callback server</text>
+    <text x="250" y="246" text-anchor="end" class="mono low">local</text>
+    <text x="18" y="268" class="mono item">exit code gates</text>
+    <text x="250" y="268" text-anchor="end" class="mono low">--fail-on</text>
+    <text x="18" y="290" class="mono item">A/B lab</text>
+    <text x="250" y="290" text-anchor="end" class="mono low">5/5 vs 0/5</text>
+    <text x="18" y="318" class="mono dim">stdlib only / no pip install</text>
+  </g>
+
+  <!-- footer -->
+  <g transform="translate(40 426)">
+    <rect width="1120" height="42" rx="8" fill="#080d14" stroke="#22303f"/>
+    <text x="18" y="26" class="mono item" fill="#35d0c0">scan</text>
+    <text x="62" y="26" class="mono item" fill="#6f8093">-&gt;</text>
+    <text x="86" y="26" class="mono item" fill="#e7e2d8">triage</text>
+    <text x="142" y="26" class="mono item" fill="#6f8093">-&gt;</text>
+    <text x="166" y="26" class="mono item" fill="#a78bfa">poc</text>
+    <text x="204" y="26" class="mono item" fill="#6f8093">-&gt;</text>
+    <text x="228" y="26" class="mono item" fill="#f0b45a">exploit</text>
+    <text x="292" y="26" class="mono item" fill="#6f8093">-&gt;</text>
+    <text x="316" y="26" class="mono item" fill="#35d0c0">proof</text>
+    <text x="1102" y="26" text-anchor="end" class="mono dim">one file / python 3.9+</text>
+  </g>
+
+  <path d="M40 482 H1160" stroke="url(#sline)" stroke-width="1" opacity=".5"/>
+</svg>

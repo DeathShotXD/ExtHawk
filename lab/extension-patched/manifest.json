@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "HawkNotes",
+  "version": "1.0.1",
+  "description": "Quick notes in your browser. Patched build: no external messaging, no broad host access.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxnmr3GgD0rAc3hwwZjTkHJ2yWOgPpypjIYk93oLjH/0OQd4Efg8rXZif79ZCwYoO5meyMXFbohtbXF14x6bow27X8dei1wWOqBRa+W5bhgo+w5riup6Jb1WD0BurBIYGzvqQxPl66kNj7loYFVrdXDQKNoFep7LnyP3W/eSwRi2pTQlNzT94QXFJN8JxLikfRoCWszFpaboJxQG8O7l6fEbNtX4MIlYtwkjVmzQQCciwQOt4tGnmgedEF/JkBNDab4K4jaILlOI9AwwAUIwqBzGm+KvAhBFYS46mf2g3lDtn0hBAhClZk28Kkn4a6LJZ4mrh2hBrG4vmKh+XVCctQwIDAQAB",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
