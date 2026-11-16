@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/badge/dependencies-none-a78bfa?style=flat-square&amp;labelColor=05080c" alt="No dependencies">
   <img src="https://img.shields.io/badge/lab-MV3%20A%2FB-35d0c0?style=flat-square&amp;labelColor=05080c" alt="MV3 A/B lab">
   <img src="https://img.shields.io/badge/tests-23%20passing-35d0c0?style=flat-square&amp;labelColor=05080c" alt="23 tests passing">
+  <a href="https://github.com/DeathShotXD/ExtHawk/actions/workflows/ci.yml"><img src="https://github.com/DeathShotXD/ExtHawk/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-e7e2d8?style=flat-square&amp;labelColor=05080c" alt="MIT license"></a>
   <a href="https://github.com/DeathShotXD/ExtHawk/stargazers"><img src="https://img.shields.io/github/stars/DeathShotXD/ExtHawk?style=flat-square&amp;labelColor=05080c&amp;color=e7e2d8" alt="GitHub stars"></a>
 </p>
