@@ -12,6 +12,11 @@
 
 Browser extensions are the most privileged code users never audit.
 
+> **Status: pre-release / validation in progress.** ExtHawk has been validated
+> against the included synthetic HawkNotes A/B lab only. It has not yet been
+> validated against real-world extensions, and it is not ready for public
+> release. A clean scan is not a security assessment.
+
 ExtHawk is a single-file attack-surface scanner and exploit harness for them.
 It reads an unpacked extension or a `.crx`, maps the manifest and the code,
 computes the extension id, and — when you need proof — loads the extension in
@@ -42,6 +47,15 @@ shows the patched build at **CLEAN / 0** and **0/5**.
 
 The GIF is rendered from the captured output of a real run against the included
 lab, not from a mock. `scripts/make_demo.py` holds the exact lines.
+
+## Validation status
+
+This is a pre-release. The only validated target is the synthetic HawkNotes
+lab. The path to a public release is documented in
+[docs/VALIDATION.md](docs/VALIDATION.md): an authorization boundary, a labeled
+vulnerable/patched corpus, detection metrics, authorized real-world targets,
+and a release gate. The repository is being taken private and will not be
+promoted until that gate passes.
 
 <p align="center">
   <img src="assets/divider.svg" alt="" width="100%">
@@ -425,6 +439,7 @@ tests/
   test_core.py             parsing, analysis, payload, and safety tests
   test_integration.py      real Chromium exploit and CLI tests
 assets/                    hero, flow, lab, surface, divider, demo GIF
+docs/VALIDATION.md         authorization boundary, corpus, metrics, release gate
 scripts/make_demo.py       renders the demo GIF from real output
 .github/workflows/         static matrix + dynamic Chrome for Testing job
 ```
